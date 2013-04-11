@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    var api_url = "http://localhost:8000";
+    var api_url = "http://btcpricer.com";
     var ss = [];
     $('[class^="convert-"]').each(function() {
         this.orig_price = parseFloat($(this).text());

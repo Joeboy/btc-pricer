@@ -66,14 +66,19 @@ def application(environ, start_response):
     GET = parse_qs(environ['QUERY_STRING'])
     cb_name = GET.get('callback', [None])[0]
 
-    if rate is None or cb_name is None:
+    if rate is None:
         return respond("500 Server Error", "{'result': 'fail'}")
 
-    return respond("200 OK", "%s(%s)" % (cb_name,
-                                         json.dumps({'result': 'success',
-                                                     'btc_price': rate})))
+    if cb_name:
+        body = "%s(%s)" % (cb_name,
+                              json.dumps({'result': 'success',
+                                          'btc_price': rate}))
+    else:
+        body = json.dumps({'result': 'success',
+                           'btc_price': rate})
+    return respond("200 OK", body)
 
 
 if __name__ == '__main__':
-    httpd = make_server('localhost', 8000, application)
+    httpd = make_server('0.0.0.0', 8001, application)
     httpd.serve_forever()

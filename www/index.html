@@ -1,0 +1,42 @@
+<html>
+<head>
+	<title>BTC Pricer - show bitcoin prices on your website</title>
+	<link rel="stylesheet" href="http://www.btcpricer.com/style.css" />
+</head>
+
+<body>
+<h2>BTC Pricer - show bitcoin prices on your website</h2>
+
+<p>BTC Pricer allows you to update your website with bitcoin prices. Prices are
+calculated in real time from your local currency price and the exchange rate
+from MtGox.</p>
+
+<p>To use it, you need to:</p>
+
+<ul>
+	<li>Ensure that your page loads jQuery. For example, put this line in the
+	&lt;head&gt; of your document:
+	<pre>&lt;script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"&gt;&lt;/script&gt;</pre>
+	</li>
+	<li>Ensure that your page loads the convert2btc.js script:
+	<pre>&lt;script src="http://www.btcpricer.com/convert2btc.js"&gt;&lt;/script&gt;</pre>
+	</li>
+
+	<li>Mark up your prices like this:
+
+	<pre>Item 1 price: $&lt;span class="convert-usd-btc"&gt;23.99&lt;/span&gt;</pre>
+	You can also use any of the following currencies instead of usd: 
+	usd, aud, cad, chf, cny, dkk, eur, gbp, hkd, jpy, nzd, pln, rub, sek, sgd, thb
+	</li>
+</ul>
+
+<p>Here's a <a href="example.html">simple example page</a>.</p>
+
+<p>You may want to download the convert2btc.js script and modify it to suit
+your needs, for example you might want to add in a discount or premium rather
+than just multiplying by the exchange rate. Or you might want to use a
+different format for the prices. The file's fairly small and simple so it
+should be fairly straightforward to modify it.</p>
+
+</body>
+</html>
