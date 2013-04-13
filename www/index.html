@@ -1,14 +1,33 @@
+<!DOCTYPE html>
 <html>
-<head>
+  <head>
 	<title>BTC Pricer - show bitcoin prices on your website</title>
-	<link rel="stylesheet" href="http://www.btcpricer.com/style.css" />
-</head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" media="screen">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+  </head>
+</html>
 
 <body>
-<h2>BTC Pricer - show bitcoin prices on your website</h2>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">BTC Pricer</a>
+        </div>
+      </div>
+    </div>
+
+<div class="container">
+<h2>BTC Pricer - Show Bitcoin Prices on your Website</h2>
 
 <p>BTC Pricer allows you to update your website with bitcoin prices. Prices are
-calculated in real time from your local currency price and the exchange rate
+calculated in real time from your local currency price and the current exchange rate
 from MtGox.</p>
 
 <p>To use it, you need to:</p>
@@ -26,7 +45,7 @@ from MtGox.</p>
 
 	<pre>Item 1 price: $&lt;span class="convert-usd-btc"&gt;23.99&lt;/span&gt;</pre>
 	You can also use any of the following currencies instead of usd: 
-	usd, aud, cad, chf, cny, dkk, eur, gbp, hkd, jpy, nzd, pln, rub, sek, sgd, thb
+	aud, cad, chf, cny, dkk, eur, gbp, hkd, jpy, nzd, pln, rub, sek, sgd, thb
 	</li>
 </ul>
 
@@ -37,6 +56,7 @@ your needs, for example you might want to add in a discount or premium rather
 than just multiplying by the exchange rate. Or you might want to use a
 different format for the prices. The file's fairly small and simple so it
 should be fairly straightforward to modify it.</p>
+</div>
 
 </body>
 </html>
