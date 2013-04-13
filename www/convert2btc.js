@@ -1,9 +1,17 @@
 $(function() {
     var api_url = "http://btcpricer.com";
-    var btc_price, cur, ss = {};
+    var cur, ss = {};
     $('[class^="convert-"]').each(function() {
+        var bits = $(this).attr('class').split('-');
+        if (bits[1] == 'btc') {
+            cur = bits[2];
+            this.from_btc = true;
+        } else if (bits[2] == 'btc') {
+            cur = bits[1];
+            this.from_btc = false;
+        }
         this.orig_price = parseFloat($(this).text());
-        cur = $(this).attr('class').split('-')[1];
+        this.cur = cur;
         if (cur in ss) ss[cur].push(this);
         else ss[cur] = [this];
     });
@@ -14,8 +22,13 @@ $(function() {
                     context: ss[cur],
                     dataType: 'jsonp'}).done(function(data) {
                 for (var i=0;i<this.length;i++) {
-                    btc_price = this[i].orig_price / data.btc_price;
-                    $(this[i]).html(this[i].orig_price + " (~" + btc_price.toPrecision(4) + " BTC)");
+                    if (this[i].from_btc) {
+                        var cur_price = this[i].orig_price * data.btc_price;
+                        $(this[i]).html(this[i].orig_price + " BTC (~" + cur_price.toFixed(2) + " " + this[i].cur.toUpperCase() + ")");
+                    } else {
+                        var btc_price = this[i].orig_price / data.btc_price;
+                        $(this[i]).html(this[i].orig_price + " (~" + btc_price.toPrecision(4) + " BTC)");
+                    }
                 }
             });
         }
