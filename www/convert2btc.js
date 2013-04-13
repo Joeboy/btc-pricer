@@ -16,17 +16,18 @@ $(function() {
         else ss[cur] = [this];
     });
 
+    var cur_price, btc_price;
     var update = function() {
         for (cur in ss) {
-            $.ajax({url: api_url + '/rate/' + cur.toUpperCase() + '/?callback=?',
+            $.ajax({url: api_url + '/rate/' + cur.toUpperCase() + '/',
                     context: ss[cur],
                     dataType: 'jsonp'}).done(function(data) {
                 for (var i=0;i<this.length;i++) {
                     if (this[i].from_btc) {
-                        var cur_price = this[i].orig_price * data.btc_price;
+                        cur_price = this[i].orig_price * data.btc_price;
                         $(this[i]).html(this[i].orig_price + " BTC (~" + cur_price.toFixed(2) + " " + this[i].cur.toUpperCase() + ")");
                     } else {
-                        var btc_price = this[i].orig_price / data.btc_price;
+                        btc_price = this[i].orig_price / data.btc_price;
                         $(this[i]).html(this[i].orig_price + " (~" + btc_price.toPrecision(4) + " BTC)");
                     }
                 }
