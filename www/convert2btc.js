@@ -1,33 +1,25 @@
 $(function() {
     var api_url = "http://btcpricer.com";
-    var ss = [];
+    var btc_price, cur, ss = {};
     $('[class^="convert-"]').each(function() {
         this.orig_price = parseFloat($(this).text());
-        this.orig_cur = $(this).attr('class').split('-')[1].toUpperCase();
-        ss.push(this);
+        cur = $(this).attr('class').split('-')[1];
+        if (cur in ss) ss[cur].push(this);
+        else ss[cur] = [this];
     });
 
     var update = function() {
-        var ex_rates = {};
-        var update_next_price = function(si) {
-            if (si >= ss.length) return;
-            var s = ss[si];
-            var update_price = function () {
-                s.btc_price = s.orig_price / ex_rates[s.orig_cur];
-                $(s).html(s.orig_price + " (~" + s.btc_price.toPrecision(4) + " BTC)");
-                update_next_price(1 + si);
-            }
-            if (s.orig_cur in ex_rates) {
-                update_price();
-            } else {
-                $.getJSON(api_url + '/' + s.orig_cur + '/?callback=?', function(data) {
-                    ex_rates[s.orig_cur] = data.btc_price;
-                    update_price();
-                });
-            }
+        for (cur in ss) {
+            $.ajax({url: api_url + '/rate/' + cur.toUpperCase() + '/?callback=?',
+                    context: ss[cur],
+                    dataType: 'jsonp'}).done(function(data) {
+                for (var i=0;i<this.length;i++) {
+                    btc_price = this[i].orig_price / data.btc_price;
+                    $(this[i]).html(this[i].orig_price + " (~" + btc_price.toPrecision(4) + " BTC)");
+                }
+            });
         }
-        update_next_price(0);
-    };
+    }
     update();
     setInterval(update, 300000);
 });

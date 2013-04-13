@@ -8,7 +8,7 @@ from time import time
 
 cur_codes = ('USD', 'AUD', 'CAD', 'CHF', 'CNY', 'DKK', 'EUR', 'GBP', 'HKD',
              'JPY', 'NZD', 'PLN', 'RUB', 'SEK', 'SGD', 'THB')
-url_re = re.compile(r'^/(?P<cur_code>%s)/$' % ("(?:%s)" % ")|(?:".join(cur_codes),))
+url_re = re.compile(r'^/rate/(?P<cur_code>%s)/$' % ("(?:%s)" % ")|(?:".join(cur_codes),))
 
 MTGOX_TICKER_URL = "https://data.mtgox.com/api/2/BTC%s/money/ticker"
 
